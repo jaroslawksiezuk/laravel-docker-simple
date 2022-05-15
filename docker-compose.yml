@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  myapp:
+    image: docker.io/bitnami/laravel:9
+    ports:
+      - '8000:8000'
+    environment:
+      - APP_NAME=myapp
+      - APP_DEBUG=true
+      - DB_HOST=null
+      - DB_CONNECTION=null
+    volumes:
+      - 'myappdata:/app'
+      - './app/Http/Controllers/Frontend:/app/app/Http/Controllers/Frontend'
+      - './app/Models:/app/app/Models'
+      - './public/assets:/app/public/assets'
+      - './resources/views:/app/resources/views'
+      - type: bind
+        source: ./routes/web.php
+        target: /app/routes/web.php
+
+volumes:
+  myappdata:
